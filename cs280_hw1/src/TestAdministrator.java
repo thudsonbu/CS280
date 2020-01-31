@@ -40,6 +40,7 @@ public class TestAdministrator {
 
         System.out.println(admin1.equals(admin3));
         System.out.println(emp1.equals(admin3));
+        System.out.println("Goodbye");
 
     }
 }

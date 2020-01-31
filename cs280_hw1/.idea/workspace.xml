@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4e83bc5b-90f4-4ff7-b010-c400ad1cc455" name="Default Changelist" comment="Added toString and Equals Testing">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4e83bc5b-90f4-4ff7-b010-c400ad1cc455" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs280_hw1/Administrator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs280_hw1/Administrator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs280_hw1/Date.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs280_hw1/Date.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs280_hw1/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs280_hw1/Employee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs280_hw1/HelloWorld.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs280_hw1/HelloWorld.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs280_hw1/HourlyEmployee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs280_hw1/HourlyEmployee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs280_hw1/SalariedEmployee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs280_hw1/SalariedEmployee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs280_hw1/TestAdministrator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs280_hw1/TestAdministrator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Administrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Administrator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TestAdministrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestAdministrator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,6 +68,14 @@
       <option name="presentableId" value="Default" />
       <updated>1579916306718</updated>
     </task>
+    <task id="LOCAL-00001" summary="Added toString and Equals Testing">
+      <created>1580513512136</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1580513512136</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -98,34 +96,38 @@
     </state>
     <state x="620" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824@0.0.1536.824" timestamp="1580247770959" />
     <state x="775" y="381" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580316111418" />
-    <state x="614" y="115" key="CommitChangelistDialog2" timestamp="1580513341921">
+    <state x="614" y="115" key="CommitChangelistDialog2" timestamp="1580513511784">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="614" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1580513341921" />
+    <state x="614" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1580513511784" />
     <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1580513164055">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1580513164055" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1580321806311">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1580513571395">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580249162074" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580321806311" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1580321806311">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580513571395" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1580513571395">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580249162074" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580321806311" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1580321806311">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580513571395" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1580513571395">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580249162074" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580321806311" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1580321806311">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580513571395" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1580513571395">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580249162074" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580321806311" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580513571395" />
+    <state x="284" y="232" key="RollbackChangesDialog" timestamp="1580514102149">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="284" y="232" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580514102149" />
     <state x="470" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1580247736616">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
