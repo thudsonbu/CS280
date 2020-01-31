@@ -62,14 +62,29 @@ public class Administrator extends SalariedEmployee{
     // EQUALS
 
     public boolean equals(Object otherObject) {
-
-        if (otherObject == null) {
-            return false;
-        } else if (getClass() != otherObject.getClass()) {
-            return false;
-        } else {
-            return true;
+        boolean equal = true;
+        if (otherObject == null) { // check if null
+            equal = false;
         }
+        if (otherObject.getClass() != getClass()){ // check if class are equal
+            equal = false;
+        }
+        Administrator admn = (Administrator) otherObject;
+        // field comparison
+        if (!this.getName().equals(admn.getName())){
+            equal = false;
+        } else if (!this.getTitle().equals(admn.getTitle())){
+            equal = false;
+        } else if (!this.getDivision().equals(admn.getDivision())){
+            equal = false;
+        } else if (!this.getSupervisor().equals(admn.getSupervisor())){
+            equal = false;
+        } else if (!this.getHireDate().equals(admn.getHireDate())){
+            equal = false;
+        } else if (this.getSalary() != admn.getSalary()){
+            equal = false;
+        }
+        return equal;
     }
 
     // READ IN DATA
@@ -89,7 +104,7 @@ public class Administrator extends SalariedEmployee{
         String inputSupervisor = keyboard.nextLine();
         System.out.println("Please enter the employee's name. ");
         String inputName = keyboard.nextLine();
-        System.out.println("Please enter the day. (as an integer) ");
+        System.out.println("Please enter the day of hire. (as an integer) ");
         int inputDay = keyboard.nextInt();
         System.out.println("Please enter the month of hire. (As an integer) ");
         int inputMonth = keyboard.nextInt();
