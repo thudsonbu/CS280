@@ -5,13 +5,9 @@ public class MountainBike extends Bicycle{
 	private double seatHeight;
 
 	public MountainBike(int startCadence, int startSpeed, int startGear, double seatHeight) {
+		super(startCadence,startSpeed,startGear);
 		seatHeight = seatHeight;
-		gear = startGear;
-		cadence = startCadence;
-		speed = startSpeed;
 	}
-
-
 
 	public double getSeatHeight() {
 		return seatHeight;
