@@ -9,6 +9,10 @@ public class MountainBike extends Bicycle{
 		seatHeight = seatHeight;
 	}
 
+	public boolean equals(MountainBike bike){
+		return super.equals(bike) && getSeatHeight() == seatHeight;
+	}
+
 	public double getSeatHeight() {
 		return seatHeight;
 	}
