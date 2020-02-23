@@ -5,20 +5,20 @@ public class Despacer {
     public static void main(String[] args){
 
         // Generate a unique temporary file name and create temporary file output stream
-        String fileName = "temporaryfile";
+        String tmpFileName = "temporaryfile";
         PrintWriter tmpOutputStream = null; // initiate a outputStream for temporary file usable by method
         Scanner userInputStream = null; // initiate a inputStream for user file usable by method
 
         while (true) {
-            File tmpFile = new File(fileName + ".txt"); // new file variable with file name and txt extension
+            File tmpFile = new File(tmpFileName + ".txt"); // new file variable with file name and txt extension
             // used to for checking if the file already exists
             if (tmpFile.exists() && tmpFile.isFile()) { // if it exists and is a file we can't use it
-                System.out.println("Found file named: " + fileName + ".txt");
-                fileName += 1;
+                System.out.println("Found file named: " + tmpFileName + ".txt");
+                tmpFileName += 1;
             } else {
                 try{
-                    tmpOutputStream = new PrintWriter(new FileOutputStream(fileName + ".txt",true));
-                    System.out.println("Created temporary file output stream: " + fileName + ".txt");
+                    tmpOutputStream = new PrintWriter(new FileOutputStream(tmpFileName + ".txt",true));
+                    System.out.println("Created temporary file output stream: " + tmpFileName + ".txt");
                 } catch (FileNotFoundException e){
                     System.out.println("Error creating temporary file output stream.");
                 }
@@ -28,11 +28,12 @@ public class Despacer {
 
 
         // Read in the name of the user file to be edited and create user file input stream
+        String userFileName = null;
         while(true){
             /*Scanner keyboard = new Scanner(System.in);
             System.out.println("What is the name of the file that you would like to edit (include file type extension): ");
-            String userFileName = keyboard.next();*/
-            String userFileName = "potato.txt";
+            userFileName = keyboard.next();*/
+            userFileName = "potato.txt";
             File userFile = new File(userFileName); // new file variable to check if the file exists
             if (userFile.exists() && userFile.isFile()){
                 try{
@@ -68,9 +69,35 @@ public class Despacer {
 
         // Close the streams. We are done with reading user and copying to tmp
         userInputStream.close();
-        tmpOutputStream.close();
+        tmpOutputStream.close(); // Closing this stream flushes the buffer into the tmp file
 
-        //TODO Copy back the content of the file into the original file
-        //TODO Remove the temporary file
+
+        // Create new streams for copying from tmp file to user file
+        PrintWriter userOutputStream = null;
+        Scanner tmpInputStream = null;
+        try{
+            tmpInputStream = new Scanner(new FileInputStream(tmpFileName + ".txt"));
+        } catch (FileNotFoundException e){
+            System.out.println("Error creating temporary file input stream.");
+        }
+        try{
+            userOutputStream = new PrintWriter(new FileOutputStream(userFileName));
+        } catch (FileNotFoundException e){
+            System.out.println("Error creating user file output stream.");
+        }
+
+
+        // Copy from tmp file to user file
+        while (tmpInputStream.hasNextLine()){
+            String newLine = tmpInputStream.nextLine();
+            userOutputStream.println(newLine);
+        }
+        userOutputStream.close(); // closing the user output stream flushes text to the file
+        tmpInputStream.close();
+
+
+        //Remove the temporary file
+        File tmpFile = new File(tmpFileName + ".txt");
+        tmpFile.delete();
     }
 }
