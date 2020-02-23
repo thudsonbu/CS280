@@ -17,7 +17,7 @@ public class Despacer {
                 fileName += 1;
             } else {
                 try{
-                    tmpOutputStream = new PrintWriter(new FileOutputStream(fileName + ".txt"));
+                    tmpOutputStream = new PrintWriter(new FileOutputStream(fileName + ".txt",true));
                     System.out.println("Created temporary file output stream: " + fileName + ".txt");
                 } catch (FileNotFoundException e){
                     System.out.println("Error creating temporary file output stream.");
@@ -29,9 +29,10 @@ public class Despacer {
 
         // Read in the name of the user file to be edited and create user file input stream
         while(true){
-            Scanner keyboard = new Scanner(System.in);
+            /*Scanner keyboard = new Scanner(System.in);
             System.out.println("What is the name of the file that you would like to edit (include file type extension): ");
-            String userFileName = keyboard.next();
+            String userFileName = keyboard.next();*/
+            String userFileName = "potato.txt";
             File userFile = new File(userFileName); // new file variable to check if the file exists
             if (userFile.exists() && userFile.isFile()){
                 try{
@@ -47,14 +48,29 @@ public class Despacer {
         }
 
 
-        //TODO Copy contents of user file into temporary file w/o spaces but with new line
-        // Copy Despaced contents into new user file
+        // Copy De-spaced contents into temp file
         while (userInputStream.hasNextLine()){
-            String newLine = userInputStream.nextLine();
-            System.out.println(newLine);
+            String[] wordsInLine; // Create array for words in a line
+            String newLine = userInputStream.nextLine(); // Read in a new line
+            wordsInLine = newLine.split(" "); // Split the line into words
+            for (int i = 0; i < wordsInLine.length; i++){
+                wordsInLine[i] = wordsInLine[i].trim(); // Trim each word of leading and trailing spaces.
+                tmpOutputStream.print(wordsInLine[i]);
+                if (i < wordsInLine.length - 1 && !wordsInLine[i].equals("")){
+                    // adds spaces if there is a word there not if it is an empty string this essentially deletes spaces
+                    tmpOutputStream.print(" ");
+                } else if (i == wordsInLine.length - 1 && !wordsInLine[i].equals("")){
+                    tmpOutputStream.print("\n");
+                    // adds a new line if it is then of a line and not an empty string
+                }
+            }
         }
+
+        // Close the streams. We are done with reading user and copying to tmp
+        userInputStream.close();
+        tmpOutputStream.close();
+
         //TODO Copy back the content of the file into the original file
         //TODO Remove the temporary file
-
     }
 }
