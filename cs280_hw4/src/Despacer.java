@@ -12,11 +12,10 @@ public class Despacer {
 
         // Read in the name of the user file to be edited and create user file input stream
         String userFileName = null;
+        Scanner keyboard = new Scanner(System.in);
         while(true){
-            /*Scanner keyboard = new Scanner(System.in);
             System.out.println("What is the name of the file that you would like to edit (include file type extension): ");
-            userFileName = keyboard.next();*/
-            userFileName = "potato.txt";
+            userFileName = keyboard.next();
             File userFile = new File(userFileName); // new file variable to check if the file exists
             if (userFile.exists() && userFile.isFile()){
                 try{
@@ -25,12 +24,13 @@ public class Despacer {
                     break;
                 } catch (FileNotFoundException e) {
                     System.out.println("Error creating user file inputSteam.");
+                    System.exit(-1);
                 }
             } else {
                 System.out.println("The file name given does not exist.");
-                System.exit(-1);
             }
         }
+        keyboard.close();
 
         while (true) {
             File tmpFile = new File(tmpFileName + ".txt"); // new file variable with file name and txt extension
@@ -44,6 +44,7 @@ public class Despacer {
                     System.out.println("Created temporary file output stream: " + tmpFileName + ".txt");
                 } catch (FileNotFoundException e){
                     System.out.println("Error creating temporary file output stream.");
+                    System.exit(-1);
                 }
                 break;
             }
@@ -70,20 +71,24 @@ public class Despacer {
         // Close the streams. We are done with reading user and copying to tmp
         userInputStream.close();
         tmpOutputStream.close(); // Closing this stream flushes the buffer into the tmp file
-
+        System.out.println("Edited contents have been copied to temporary file.");
 
         // Create new streams for copying from tmp file to user file
         PrintWriter userOutputStream = null;
         Scanner tmpInputStream = null;
         try{
             tmpInputStream = new Scanner(new FileInputStream(tmpFileName + ".txt"));
+            System.out.println("Input stream from temporary file created.");
         } catch (FileNotFoundException e){
             System.out.println("Error creating temporary file input stream.");
+            System.exit(-1);
         }
         try{
             userOutputStream = new PrintWriter(new FileOutputStream(userFileName));
+            System.out.println("Output stream to user file created.");
         } catch (FileNotFoundException e){
             System.out.println("Error creating user file output stream.");
+            System.exit(-1);
         }
 
 
@@ -94,10 +99,12 @@ public class Despacer {
         }
         userOutputStream.close(); // closing the user output stream flushes text to the file
         tmpInputStream.close();
+        System.out.println("Temporary file has been copied to user file.");
 
 
         //Remove the temporary file
         File tmpFile = new File(tmpFileName + ".txt");
         tmpFile.delete();
+        System.out.println("Temporary file has been deleted.");
     }
 }
