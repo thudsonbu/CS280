@@ -9,23 +9,6 @@ public class Despacer {
         PrintWriter tmpOutputStream = null; // initiate a outputStream for temporary file usable by method
         Scanner userInputStream = null; // initiate a inputStream for user file usable by method
 
-        while (true) {
-            File tmpFile = new File(tmpFileName + ".txt"); // new file variable with file name and txt extension
-            // used to for checking if the file already exists
-            if (tmpFile.exists() && tmpFile.isFile()) { // if it exists and is a file we can't use it
-                System.out.println("Found file named: " + tmpFileName + ".txt");
-                tmpFileName += 1;
-            } else {
-                try{
-                    tmpOutputStream = new PrintWriter(new FileOutputStream(tmpFileName + ".txt",true));
-                    System.out.println("Created temporary file output stream: " + tmpFileName + ".txt");
-                } catch (FileNotFoundException e){
-                    System.out.println("Error creating temporary file output stream.");
-                }
-                break;
-            }
-        }
-
 
         // Read in the name of the user file to be edited and create user file input stream
         String userFileName = null;
@@ -45,9 +28,26 @@ public class Despacer {
                 }
             } else {
                 System.out.println("The file name given does not exist.");
+                System.exit(-1);
             }
         }
 
+        while (true) {
+            File tmpFile = new File(tmpFileName + ".txt"); // new file variable with file name and txt extension
+            // used to for checking if the file already exists
+            if (tmpFile.exists() && tmpFile.isFile()) { // if it exists and is a file we can't use it
+                System.out.println("Found file named: " + tmpFileName + ".txt");
+                tmpFileName += 1;
+            } else {
+                try{
+                    tmpOutputStream = new PrintWriter(new FileOutputStream(tmpFileName + ".txt",true));
+                    System.out.println("Created temporary file output stream: " + tmpFileName + ".txt");
+                } catch (FileNotFoundException e){
+                    System.out.println("Error creating temporary file output stream.");
+                }
+                break;
+            }
+        }
 
         // Copy De-spaced contents into temp file
         while (userInputStream.hasNextLine()){
