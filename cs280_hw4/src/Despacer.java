@@ -14,8 +14,11 @@ public class Despacer {
         String userFileName = null;
         Scanner keyboard = new Scanner(System.in);
         while(true){
-            System.out.println("What is the name of the file that you would like to edit (include file type extension): ");
+            System.out.println("What is the name of the file that you would like to edit (include file type extension or type exit to exit): ");
             userFileName = keyboard.next();
+            if (userFileName.equals("exit")){
+                System.exit(0);
+            }
             File userFile = new File(userFileName); // new file variable to check if the file exists
             if (userFile.exists() && userFile.isFile()){
                 try{
