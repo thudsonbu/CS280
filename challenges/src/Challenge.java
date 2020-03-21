@@ -4,7 +4,7 @@ public class Challenge {
     /*
      Create a function that tests whether or not an integer is a perfect number. A perfect number is a number that can
      be written as the sum of its factors, excluding the number itself.
-      */
+     */
     public static boolean checkPerfect(int num) {
         ArrayList<Integer> factors = new ArrayList<Integer>(0);
         int i = 1;
@@ -21,8 +21,44 @@ public class Challenge {
         return sum == num;
     }
 
+    /*
+     Create a function that takes two strings and returns true if the first string ends with the second string;
+     otherwise return false.
+     */
+
+    public static boolean checkEnding(String str1, String str2) {
+        return str1.substring(str1.length()-str2.length()).equals(str2);
+    }
+
+    /*
+     Create a function that reverses the order of a string.
+     */
+
+    public static String reverse(final String str) {
+        String reversed = "";
+        for (int i = str.length()-1; i >= 0; i-=1){
+            reversed = reversed + str.charAt(i);
+        }
+        return reversed;
+    }
+
+    /*
+     Write a function that takes a string name and a number num (either 0 or 1) and return "Hello" + name if num is 1,
+     otherwise return "Bye" + name.
+     */
+
+    public static String sayHelloBye(String name, int num) {
+        String greeting = "";
+        if (num == 1){
+            greeting = "Hello ";
+        } else {
+            greeting = "Bye ";
+        }
+        return greeting + name;
+    }
+
     public static void main(String[] args){
-        System.out.println(checkPerfect(6));
+        System.out.println(sayHelloBye("Tom", 1));
     }
 
 
