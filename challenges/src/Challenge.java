@@ -1,14 +1,28 @@
+import java.util.ArrayList;
+
 public class Challenge {
     /*
-     In this challenge, the goal is recomposing scrambled strings made of two or more words.
-
-     Every string has to be reversed not in its totality, but by vowels or consonants clusters in the order they are found;
-     after splitting the string in groups, and reversing every group with more than a letter, you'll obtain the correct
-     sequence:
+     Create a function that tests whether or not an integer is a perfect number. A perfect number is a number that can
+     be written as the sum of its factors, excluding the number itself.
       */
-    public static String recompose(String str){
-        // Identify clusters
+    public static boolean checkPerfect(int num) {
+        ArrayList<Integer> factors = new ArrayList<Integer>(0);
+        int i = 1;
+        while (i < num) {
+            if (num % i == 0) {
+                factors.add(i);
+            }
+            i++;
+        }
+        int sum = 0;
+        for (Integer factor : factors) {
+            sum += factor;
+        }
+        return sum == num;
+    }
 
+    public static void main(String[] args){
+        System.out.println(checkPerfect(6));
     }
 
 
@@ -30,9 +44,5 @@ public class Challenge {
             }
         }
         return inv + add + length + "000";
-    }
-
-    public static void main(String[] args) {
-        System.out.println(inatorInator("potato"));
     }
 }
