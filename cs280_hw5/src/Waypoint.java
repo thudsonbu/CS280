@@ -1,4 +1,4 @@
-import static java.lang.Math.abs;
+import static java.lang.Math.*;
 
 public class Waypoint {
 
@@ -58,8 +58,23 @@ public class Waypoint {
 
     // Find the distance from another waypoint.
     public double distanceFrom(Waypoint w){
+        double distance = 0;
+
+        // Get differences of y and x
         double y_difference = abs(this.y_coordinate - w.y_coordinate);
         double x_difference = abs(this.x_coordinate - w.x_coordinate);
 
+        // Check to see if vertical or horizontal location change
+        if (y_difference == 0 && x_difference == 0){
+            distance = 0;
+        } else if (y_difference == 0){
+            distance = x_difference;
+        } else if (x_difference == 0){
+            distance = y_difference;
+        } else {
+            distance = sqrt(pow(y_difference,2) + pow(x_difference,2));
+        }
+
+        return distance;
     }
 }
