@@ -76,4 +76,8 @@ public class Waypoint {
 
         return distance;
     }
+
+    public int timeDifference(Waypoint w) {
+        return this.time - w.time;
+    }
 }

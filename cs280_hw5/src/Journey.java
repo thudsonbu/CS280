@@ -5,11 +5,13 @@ public class Journey {
     // Instance variables
     double distance;
     double speed;
+    int time;
 
     // Consturctor
-    public Journey(double d, double s){
+    public Journey(double d, double s, int t){
         distance = d;
         speed = s;
+        time = t;
     }
 
     //Get and Set Methods
@@ -21,11 +23,19 @@ public class Journey {
         return speed;
     }
 
+    public int getTime() {
+        return time;
+    }
+
     public void setDistance(double distance) {
         this.distance = distance;
     }
 
     public void setSpeed(double speed) {
         this.speed = speed;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 }

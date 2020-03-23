@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 //TODO Finish the prompting system
-//TODO Create the calculate distance and speed method
 
 public class GPS {
     public static void main(String[] args) {
@@ -67,10 +66,34 @@ public class GPS {
             // Add the new waypoint to the waypoint list.
             waypointList.add(new Waypoint(x,y,t));
         }
+
+        System.out.println("Waypoints have been entered, calculating distance and speed.");
+        Journey currentJourney = calculateDistanceAndSpeed(waypointList);
+
+
     }
 
-    public Journey calculateDistanceAndSpeed(ArrayList<Waypoint> lst) {
-        double totalDistance;
-        int totalTime;
+    public static Journey calculateDistanceAndSpeed(ArrayList<Waypoint> lst) {
+        // Variables to use for calculations
+        double totalDistance = 0;
+        int totalTime = 0;
+        double averageSpeed;
+
+        // Get total distance traveled and total time traveled
+        for (int i = 1; i < lst.size()-1; i++){
+            Waypoint currentWaypoint = lst.get(i);
+            Waypoint previousWaypoint = lst.get(i-1);
+            totalDistance += currentWaypoint.distanceFrom(previousWaypoint);
+            totalTime += currentWaypoint.timeDifference(previousWaypoint);
+        }
+
+        // Calculate the average speed can't divide by zero
+        if (totalTime != 0){
+            averageSpeed = totalDistance / (double)totalTime;
+        } else {
+            averageSpeed = 0;
+        }
+
+        return new Journey(totalDistance,averageSpeed,totalTime);
     }
 }
