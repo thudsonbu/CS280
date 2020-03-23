@@ -15,14 +15,12 @@ public class GPS {
         // Prompt and Add Waypoints
         waypointList = promptAndAddWaypoints(waypointList);
 
-        calculateDistanceAndSpeed(waypointList);
-
+        // Output Data
         System.out.println("Waypoints have been entered, calculating distance and speed.");
         Journey currentJourney = calculateDistanceAndSpeed(waypointList);
-        System.out.println("Total Distance Traveled: " + currentJourney.distance);
-        System.out.println("Total Time Elapsed: " + currentJourney.time);
-        System.out.println("Average Speed: " + currentJourney.speed);
-
+        System.out.printf("Total Distance Traveled: %.2f mile(s)", + currentJourney.distance);
+        System.out.printf("\nTotal Time Elapsed: %.2f hour(s)", currentJourney.time);
+        System.out.printf("\nAverage Speed: %.2f mph", currentJourney.speed);
     }
 
     public static ArrayList<Waypoint> promptAndAddWaypoints(ArrayList<Waypoint> waypointList){
@@ -97,7 +95,7 @@ public class GPS {
             Waypoint currentWaypoint = lst.get(i);
             Waypoint previousWaypoint = lst.get(i-1);
             totalDistance = totalDistance + currentWaypoint.distanceFrom(previousWaypoint)/10.0;
-            totalTime = totalTime + (double)currentWaypoint.timeDifference(previousWaypoint)/3600.0;
+            totalTime = totalTime + currentWaypoint.timeDifference(previousWaypoint)/3600.0;
         }
 
         // Calculate the average speed can't divide by zero
