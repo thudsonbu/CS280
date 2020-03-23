@@ -2,9 +2,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import static java.lang.Math.*;
 
-//TODO Output Formatting
-
 public class GPS {
+    /*
+    The GPS class uses the Waypoint and Journey subclases to measure the distance and speed of an object
+    traveling on an x,y coordinate plane. It does this by prompting the user for waypoints, adding them to the waypoints
+    list, the calculating the total distance between waypoints in the list, and dividing it by the dividing the total
+    distance by the final time value entered. The waypoints do not need to be in order of time. I have used a simple
+    counting sort algorithm to sort by time.
+     */
     public static void main(String[] args) {
         // Initialize GPS
         ArrayList<Waypoint> waypointList = new ArrayList<>();
@@ -14,6 +19,9 @@ public class GPS {
 
         // Prompt and Add Waypoints
         waypointList = promptAndAddWaypoints(waypointList);
+
+        // Sort Waypoints by time
+        waypointList = waypointSort(waypointList);
 
         // Output Data
         System.out.println("Waypoints have been entered, calculating distance and speed.");
@@ -87,7 +95,7 @@ public class GPS {
     public static Journey calculateDistanceAndSpeed(ArrayList<Waypoint> lst) {
         // Variables to use for calculations
         double totalDistance = 0;
-        double totalTime = 0;
+        double totalTime = (lst.get(lst.size()-1).time)/3600; // The total time is the time value for the last waypoint.
         double averageSpeed;
 
         // Get total distance traveled and total time traveled
@@ -95,7 +103,6 @@ public class GPS {
             Waypoint currentWaypoint = lst.get(i);
             Waypoint previousWaypoint = lst.get(i-1);
             totalDistance = totalDistance + currentWaypoint.distanceFrom(previousWaypoint)/10.0;
-            totalTime = totalTime + currentWaypoint.timeDifference(previousWaypoint)/3600.0;
         }
 
         // Calculate the average speed can't divide by zero
@@ -106,6 +113,27 @@ public class GPS {
         }
 
         return new Journey(totalDistance,averageSpeed, totalTime);
+    }
+
+    public static ArrayList<Waypoint> waypointSort(ArrayList<Waypoint> lst) {
+        Waypoint maxWaypoint = new Waypoint(0,0,-1);
+        ArrayList<Waypoint> newWaypointList = new ArrayList<>();
+        // Find max
+        while (lst.size() > 0) {
+            int index = 0;
+            int removeIndex = 0;
+            maxWaypoint = new Waypoint(0,0,-1);
+            for (Waypoint w: lst) {
+                if (w.time > maxWaypoint.time){
+                    maxWaypoint = w;
+                    removeIndex = index;
+                }
+                index += 1;
+            }
+            lst.remove(removeIndex);
+            newWaypointList.add(0,maxWaypoint);
+        }
+        return newWaypointList;
     }
 
     public static class Waypoint {
