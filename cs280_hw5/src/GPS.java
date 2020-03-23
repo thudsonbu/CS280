@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import static java.lang.Math.*;
 
 //TODO Output Formatting
-//TODO Journey and Waypoint as Subclasses
 
 public class GPS {
     public static void main(String[] args) {
@@ -38,7 +38,8 @@ public class GPS {
 
             // GPS prompt for x value loop
             while (true) {
-                System.out.println("Enter the next waypoint's x value in 10ths of a mile.");
+                System.out.println("Enter the next waypoint's x value in 10ths of a mile. " +
+                        "\nEnter -1 to stop entering waypoints.");
                 try {
                     x = keyboard.nextDouble();
                     break;
@@ -107,5 +108,129 @@ public class GPS {
         }
 
         return new Journey(totalDistance,averageSpeed, totalTime);
+    }
+
+    public static class Waypoint {
+
+        // Instance Variables
+        double x_coordinate;
+        double y_coordinate;
+        int time;
+
+        // Constructors
+
+        // No argument constructor
+        public Waypoint(){
+            x_coordinate = 0;
+            y_coordinate = 0;
+            time = 0;
+        }
+
+        // Full argument constructor
+        public Waypoint(double x,double y, int t){
+            boolean valid = false;
+            x_coordinate = x;
+            y_coordinate = y;
+            if (t > 0){
+                time = t;
+                valid = true;
+            }
+        }
+
+        // Get and Set Methods
+        public double getX_coordinate() {
+            return x_coordinate;
+        }
+
+        public double getY_coordinate() {
+            return y_coordinate;
+        }
+
+        public int getTime() {
+            return time;
+        }
+
+        public boolean setX_coordinate(double x) {
+            x_coordinate = x;
+            return true;
+        }
+
+        public boolean setY_coordinate(double y) {
+            y_coordinate = y;
+            return true;
+        }
+
+        public boolean setTime(int t) {
+            time = t;
+            return true;
+        }
+
+        // Find the distance from another waypoint.
+        public double distanceFrom(Waypoint w){
+            double distance = 0;
+
+            // Get differences of y and x
+            double y_difference = abs(this.y_coordinate - w.y_coordinate);
+            double x_difference = abs(this.x_coordinate - w.x_coordinate);
+
+            // Check to see if vertical or horizontal location change
+            if (y_difference == 0 && x_difference == 0){
+                distance = 0;
+            } else if (y_difference == 0){
+                distance = x_difference;
+            } else if (x_difference == 0){
+                distance = y_difference;
+            } else {
+                distance = sqrt(pow(y_difference,2) + pow(x_difference,2));
+            }
+
+            return distance;
+        }
+
+        public int timeDifference(Waypoint w) {
+            return this.time - w.time;
+        }
+    }
+
+    public static class Journey {
+    /*  The journey class is used by the GPS class in order to return distance and speed
+        from a single method */
+
+        // Instance variables
+        double distance;
+        double speed;
+        double time;
+
+        // Constructor
+        public Journey(double d, double s, double t){
+            distance = d;
+            speed = s;
+            time = t;
+        }
+
+        //Get and Set Methods
+        public double getDistance() {
+            return distance;
+        }
+
+        public double getSpeed() {
+            return speed;
+        }
+
+        public double getTime() {
+            return time;
+        }
+
+        public void setDistance(double distance) {
+            this.distance = distance;
+        }
+
+        public void setSpeed(double speed) {
+            this.speed = speed;
+        }
+
+        public void setTime(double time) {
+            this.time = time;
+        }
     }
 }
