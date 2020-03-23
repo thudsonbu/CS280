@@ -5,10 +5,10 @@ public class Journey {
     // Instance variables
     double distance;
     double speed;
-    int time;
+    double time;
 
-    // Consturctor
-    public Journey(double d, double s, int t){
+    // Constructor
+    public Journey(double d, double s, double t){
         distance = d;
         speed = s;
         time = t;
@@ -23,7 +23,7 @@ public class Journey {
         return speed;
     }
 
-    public int getTime() {
+    public double getTime() {
         return time;
     }
 
@@ -35,7 +35,7 @@ public class Journey {
         this.speed = speed;
     }
 
-    public void setTime(int time) {
+    public void setTime(double time) {
         this.time = time;
     }
 }
