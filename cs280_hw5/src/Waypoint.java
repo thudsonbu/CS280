@@ -17,7 +17,7 @@ public class Waypoint {
     }
 
     // Full argument constructor
-    public boolean Waypoint(double x,double y, int t){
+    public Waypoint(double x,double y, int t){
         boolean valid = false;
         x_coordinate = x;
         y_coordinate = y;
@@ -25,7 +25,6 @@ public class Waypoint {
             time = t;
             valid = true;
         }
-        return valid;
     }
 
     // Get and Set Methods
