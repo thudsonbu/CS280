@@ -17,7 +17,7 @@ public class SecondSwing  extends JFrame {
         add(endButton);
     }
 
-    public class EndingListener implements ActionListener {
+    public static class EndingListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
         }
