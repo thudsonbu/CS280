@@ -1,13 +1,16 @@
 
-public class FirstSwing {
+public class SwingDemo {
     public static void main(String[] args){
-        SecondSwing w = new SecondSwing();
-        w.setVisible(true);
+        BasicSwing basic = new BasicSwing();
+        basic.setVisible(true);
 
         BorderLayoutSwing b = new BorderLayoutSwing();
         b.setVisible(true);
 
         FlowLayoutSwing f = new FlowLayoutSwing();
         f.setVisible(true);
+
+        GridLayoutSwing g = new GridLayoutSwing(2,2);
+        g.setVisible(true);
     }
 }
