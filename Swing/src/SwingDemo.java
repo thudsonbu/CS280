@@ -12,5 +12,8 @@ public class SwingDemo {
 
         GridLayoutSwing g = new GridLayoutSwing(2,2);
         g.setVisible(true);
+
+        SwingPanelDemo p = new SwingPanelDemo();
+        p.setVisible(true);
     }
 }
