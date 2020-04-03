@@ -6,5 +6,8 @@ public class FirstSwing {
 
         BorderLayoutSwing b = new BorderLayoutSwing();
         b.setVisible(true);
+
+        FlowLayoutSwing f = new FlowLayoutSwing();
+        f.setVisible(true);
     }
 }
