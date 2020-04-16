@@ -63,6 +63,9 @@ public class FindNonsan {
                 System.out.println("No results found.");
                 System.exit(0);
             }
+
+            pstm.close();
+            con.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
