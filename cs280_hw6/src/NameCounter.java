@@ -1,3 +1,6 @@
+/* NameCounter reads two lists of the most popular boy and girl names from a text files with their respective
+* counts and sums the counts. A the total count of names that both lists have in common is also returned. */
+
 import java.io.*;
 import java.util.Scanner;
 import java.util.HashSet;
