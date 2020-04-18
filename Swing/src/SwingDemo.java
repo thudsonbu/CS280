@@ -15,5 +15,8 @@ public class SwingDemo {
 
         SwingPanelDemo p = new SwingPanelDemo();
         p.setVisible(true);
+
+        SwingMenu m = new SwingMenu();
+        m.setVisible(true);
     }
 }
