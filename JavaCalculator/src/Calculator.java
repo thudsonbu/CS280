@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
 public class Calculator extends JFrame implements ActionListener{
     // CREATE A SWING GUI
     // Set width and height of calculator gui
-    public static final int WIDTH = 400;
-    public static final int HEIGHT = 600;
+    public static final int WIDTH = 300;
+    public static final int HEIGHT = 300;
     // Panels
     private JPanel top;
     private JPanel buttons;
@@ -25,11 +25,13 @@ public class Calculator extends JFrame implements ActionListener{
         // Add input and output text boxes to the top of the calculator
         top = new JPanel();
         top.setLayout(new GridLayout(1,2));
-        input = new JTextField("Input: 0",1);
+        input = new JTextField("I: 0",1);
         input.setEditable(false);
+        input.setFont(new Font("Monaco", Font.PLAIN, 15));
         top.add(input);
-        output = new JTextField("Output: 0", 1);
+        output = new JTextField("O: 0", 1);
         output.setEditable(false);
+        output.setFont(new Font("Monaco", Font.PLAIN, 15));
         top.add(output);
 
         add(top, BorderLayout.NORTH);
@@ -94,26 +96,28 @@ public class Calculator extends JFrame implements ActionListener{
         dot.addActionListener(new numberListener());
         buttons.add(dot);
 
-        JButton potato = new JButton("Potato");
-        potato.addActionListener(new potatoListener());
-        buttons.add(potato);
+        JButton none = new JButton();
+        buttons.add(none);
 
         JButton divide = new JButton("/");
         divide.addActionListener(new operandListener());
         buttons.add(divide);
 
-        JButton reset = new JButton("C/INPUT");
+        JButton reset = new JButton("R");
         reset.addActionListener(new resetListener());
         buttons.add(reset);
 
-        JButton clear = new JButton("C/ALL");
+        JButton clear = new JButton("A/E");
         clear.addActionListener(new clearListener());
         buttons.add(clear);
 
-        JButton enter = new JButton("ENTER");
-        enter.setSize(400,100);
+        JButton enter = new JButton("=");
         enter.addActionListener(new enterListener());
         buttons.add(enter);
+
+        JButton potato = new JButton("Potato");
+        potato.addActionListener(new potatoListener());
+        buttons.add(potato);
 
         add(buttons, BorderLayout.CENTER);
     }
@@ -142,7 +146,7 @@ public class Calculator extends JFrame implements ActionListener{
             else {
                 System.out.println("Hey the equation is full");
             }
-            input.setText("Input: " + number1 + " " + operand + " " + number2);
+            input.setText("I: " + number1 + " " + operand + " " + number2);
         }
     }
 
@@ -152,14 +156,14 @@ public class Calculator extends JFrame implements ActionListener{
             operand = e.getActionCommand();
             operandUsed = true;
             number1Used = true;
-            input.setText("Input: " + number1 + " " + operand + " " + number2);
+            input.setText("I: " + number1 + " " + operand + " " + number2);
         }
     }
 
     // This clears everything in the input box
     public class resetListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            input.setText("Input: 0");
+            input.setText("I: 0");
             operand = " ";
             number1 = " ";
             number2 = " ";
@@ -173,7 +177,7 @@ public class Calculator extends JFrame implements ActionListener{
     // This clears all items
     public class clearListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            input.setText("Input: 0");
+            input.setText("I: 0");
             operand = " ";
             number1 = " ";
             number2 = " ";
@@ -181,7 +185,7 @@ public class Calculator extends JFrame implements ActionListener{
             operandUsed = false;
             number1Used = false;
             number2Used = false;
-            output.setText("Output: 0");
+            output.setText("O: 0");
             outputNumber = 0;
         }
     }
@@ -201,22 +205,22 @@ public class Calculator extends JFrame implements ActionListener{
                 switch (operand) {
                     case "+":
                         outputNumber = Double.parseDouble(number1) + Double.parseDouble(number2);
-                        output.setText("Output: " + outputNumber);
+                        output.setText("O: " + outputNumber);
                         // Subtraction with full equation
                         break;
                     case "-":
                         outputNumber = Double.parseDouble(number1) - Double.parseDouble(number2);
-                        output.setText("Output: " + outputNumber);
+                        output.setText("O: " + outputNumber);
                         // Multiplication with full equation
                         break;
                     case "x":
                         outputNumber = Double.parseDouble(number1) * Double.parseDouble(number2);
-                        output.setText("Output: " + outputNumber);
+                        output.setText("O: " + outputNumber);
                         // Division with full equation
                         break;
                     case "/":
                         outputNumber = Double.parseDouble(number1) / Double.parseDouble(number2);
-                        output.setText("Output: " + outputNumber);
+                        output.setText("O: " + outputNumber);
                         break;
                 }
             }
@@ -226,22 +230,22 @@ public class Calculator extends JFrame implements ActionListener{
                 switch (operand) {
                     case "+":
                         outputNumber = outputNumber + Double.parseDouble(number2);
-                        output.setText("Output: " + outputNumber);
+                        output.setText("O: " + outputNumber);
                         // Subtraction with full equation
                         break;
                     case "-":
                         outputNumber = outputNumber - Double.parseDouble(number2);
-                        output.setText("Output: " + outputNumber);
+                        output.setText("O: " + outputNumber);
                         // Multiplication with full equation
                         break;
                     case "x":
                         outputNumber = outputNumber * Double.parseDouble(number2);
-                        output.setText("Output: " + outputNumber);
+                        output.setText("O: " + outputNumber);
                         // Division with full equation
                         break;
                     case "/":
                         outputNumber = outputNumber / Double.parseDouble(number2);
-                        output.setText("Output: " + outputNumber);
+                        output.setText("O: " + outputNumber);
                         break;
                 }
             }
@@ -256,6 +260,15 @@ public class Calculator extends JFrame implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             Calculator potatoCalculator = new Calculator();
             potatoCalculator.setVisible(true);
+        }
+    }
+
+    public class selfDestructListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            for (int i= 0; i < 1000000; i++) {
+                Calculator selfDesctructCalculator = new Calculator();
+                selfDesctructCalculator.setVisible(true);
+            }
         }
     }
 
