@@ -25,10 +25,10 @@ public class Calculator extends JFrame implements ActionListener{
         // Add input and output text boxes to the top of the calculator
         top = new JPanel();
         top.setLayout(new GridLayout(1,2));
-        input = new JTextField("Input: ",1);
+        input = new JTextField("Input: 0",1);
         input.setEditable(false);
         top.add(input);
-        output = new JTextField("Output: ", 1);
+        output = new JTextField("Output: 0", 1);
         output.setEditable(false);
         top.add(output);
 
@@ -90,17 +90,25 @@ public class Calculator extends JFrame implements ActionListener{
         zero.addActionListener(new numberListener());
         buttons.add(zero);
 
-        JButton reset = new JButton("RESET");
-        reset.addActionListener(new resetListener());
-        buttons.add(reset);
+        JButton dot = new JButton(".");
+        dot.addActionListener(new numberListener());
+        buttons.add(dot);
 
-        JButton clear = new JButton("CLEAR");
-        clear.addActionListener(this);
-        buttons.add(clear);
+        JButton potato = new JButton("Potato");
+        potato.addActionListener(new potatoListener());
+        buttons.add(potato);
 
         JButton divide = new JButton("/");
         divide.addActionListener(new operandListener());
         buttons.add(divide);
+
+        JButton reset = new JButton("C/INPUT");
+        reset.addActionListener(new resetListener());
+        buttons.add(reset);
+
+        JButton clear = new JButton("C/ALL");
+        clear.addActionListener(new clearListener());
+        buttons.add(clear);
 
         JButton enter = new JButton("ENTER");
         enter.setSize(400,100);
@@ -111,9 +119,9 @@ public class Calculator extends JFrame implements ActionListener{
     }
 
     // Variables for input equation
-    double number1 = 0.0;
+    String number1 = " ";
     String operand = " ";
-    double number2 = 0.0;
+    String number2 = " ";
     double outputNumber = 0.0;
     boolean number1Used = false;
     boolean number2Used = false;
@@ -123,21 +131,18 @@ public class Calculator extends JFrame implements ActionListener{
     public class numberListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             // If number 1 is not used we full this space
-            if (number1Used == false) {
-                number1 = Integer.parseInt(e.getActionCommand());
-                number1Used = true;
-                input.setText("Input: " + number1 + " " + operand);
+            if (!number1Used) {
+                number1 =  number1 + e.getActionCommand();
             }
             // If number 2 is not used we add that number
-            else if (number2Used == false) {
-                number2 = Integer.parseInt(e.getActionCommand());
-                number2Used = true;
-                input.setText("Input: " + number1 + " " + operand + " " + number2);
+            else if (!number2Used) {
+                number2 = number2 + e.getActionCommand();
             }
             // Otherwise the equation if full
             else {
                 System.out.println("Hey the equation is full");
             }
+            input.setText("Input: " + number1 + " " + operand + " " + number2);
         }
     }
 
@@ -146,30 +151,38 @@ public class Calculator extends JFrame implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             operand = e.getActionCommand();
             operandUsed = true;
-            // If number2 is not used and number 1 is not used only the operand will be displayed
-            if (number2Used == false && number1Used == false) {
-                input.setText("Input: " + "  " + operand);
-            }
-            // If number1 is used but not number 2 only number1 and operand will be displayed
-            else if (number1Used == true && number2Used == false) {
-                input.setText("Input: " + number1 + " " + operand);
-            }
-            // Display all elements otherwise
-            else {
-                input.setText("Input: " + number1 + " " + operand + " " + number2);
-            }
+            number1Used = true;
+            input.setText("Input: " + number1 + " " + operand + " " + number2);
         }
     }
 
     // This clears everything in the input box
     public class resetListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            input.setText("Input: ");
+            input.setText("Input: 0");
             operand = " ";
+            number1 = " ";
+            number2 = " ";
             // When these are set to false the other methods will not display them
             operandUsed = false;
             number1Used = false;
             number2Used = false;
+        }
+    }
+
+    // This clears all items
+    public class clearListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            input.setText("Input: 0");
+            operand = " ";
+            number1 = " ";
+            number2 = " ";
+            // When these are set to false the other methods will not display them
+            operandUsed = false;
+            number1Used = false;
+            number2Used = false;
+            output.setText("Output: 0");
+            outputNumber = 0;
         }
     }
 
@@ -178,43 +191,58 @@ public class Calculator extends JFrame implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             // Determine the type of operation
             // Full equation
+            if (!number2.equals(" ")){
+                number2Used = true;
+            }
+            number1Used = !number1.equals(" ");
+            // If there is a full equation this executes
             if (operandUsed && number1Used && number2Used) {
                 // Addition with full equation
-                if (operand.equals("+")) {
-                    outputNumber = number1 + number2;
-                    output.setText("Output: " + outputNumber);
-                // Subtraction with full equation
-                } else if (operand.equals("-")){
-                    outputNumber = number1 - number2;
-                    output.setText("Output: " + outputNumber);
-                // Multiplication with full equation
-                } else if (operand.equals("x")){
-                    outputNumber = number1 * number2;
-                    output.setText("Output: " + outputNumber);
-                // Division with full equation
-                } else if (operand.equals("/")) {
-                    outputNumber = number1/number2;
-                    output.setText("Output: " + outputNumber);
+                switch (operand) {
+                    case "+":
+                        outputNumber = Double.parseDouble(number1) + Double.parseDouble(number2);
+                        output.setText("Output: " + outputNumber);
+                        // Subtraction with full equation
+                        break;
+                    case "-":
+                        outputNumber = Double.parseDouble(number1) - Double.parseDouble(number2);
+                        output.setText("Output: " + outputNumber);
+                        // Multiplication with full equation
+                        break;
+                    case "x":
+                        outputNumber = Double.parseDouble(number1) * Double.parseDouble(number2);
+                        output.setText("Output: " + outputNumber);
+                        // Division with full equation
+                        break;
+                    case "/":
+                        outputNumber = Double.parseDouble(number1) / Double.parseDouble(number2);
+                        output.setText("Output: " + outputNumber);
+                        break;
                 }
             }
-            // Part of equation
-            else if (operandUsed && number1Used) {
-                // Addition with part
-                if (operand.equals("+")) {
-                    outputNumber = number1 + outputNumber;
-                    output.setText("Output: " + outputNumber);
-                    // Subtraction with part
-                } else if (operand.equals("-")){
-                    outputNumber = outputNumber - number1;
-                    output.setText("Output: " + outputNumber);
-                    // Multiplication with part
-                } else if (operand.equals("x")){
-                    outputNumber = number1 * outputNumber;
-                    output.setText("Output: " + outputNumber);
-                    // Division with with part
-                } else if (operand.equals("/")) {
-                    outputNumber = outputNumber / number1;
-                    output.setText("Output: " + outputNumber);
+            // If the equation starts with an opperand the first number is replaced by current output
+            else if (operandUsed && number2Used) {
+                // Addition with full equation
+                switch (operand) {
+                    case "+":
+                        outputNumber = outputNumber + Double.parseDouble(number2);
+                        output.setText("Output: " + outputNumber);
+                        // Subtraction with full equation
+                        break;
+                    case "-":
+                        outputNumber = outputNumber - Double.parseDouble(number2);
+                        output.setText("Output: " + outputNumber);
+                        // Multiplication with full equation
+                        break;
+                    case "x":
+                        outputNumber = outputNumber * Double.parseDouble(number2);
+                        output.setText("Output: " + outputNumber);
+                        // Division with full equation
+                        break;
+                    case "/":
+                        outputNumber = outputNumber / Double.parseDouble(number2);
+                        output.setText("Output: " + outputNumber);
+                        break;
                 }
             }
             // There is not sufficient information to complete a operation
@@ -224,8 +252,14 @@ public class Calculator extends JFrame implements ActionListener{
         }
     }
 
+    public class potatoListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            Calculator potatoCalculator = new Calculator();
+            potatoCalculator.setVisible(true);
+        }
+    }
 
-    //
+    // Something is broken if this is executed
     public void actionPerformed(ActionEvent e) {
         System.out.println("Potato");
     }
