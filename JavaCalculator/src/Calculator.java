@@ -15,12 +15,29 @@ public class Calculator extends JFrame implements ActionListener{
     private JTextField input;
     private JTextField output;
 
+    // Variables for input equation
+    String number1 = " ";
+    String operand = " ";
+    String number2 = " ";
+    double outputNumber = 0.0;
+    boolean number1Used = false;
+    boolean number2Used = false;
+    boolean operandUsed = false;
+
     // Build the gui
-    public Calculator() {
+    public Calculator(String num1, String oper, String num2, double outNum, boolean num1Used, boolean num2Used, boolean operUsed) {
         super("Tom's Java Calculator");
         setSize(WIDTH,HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+
+        number1 = num1;
+        number2 = num2;
+        operand = oper;
+        outputNumber = outNum;
+        number1Used = num1Used;
+        number2Used = num2Used;
+        operandUsed = operUsed;
 
         // Add input and output text boxes to the top of the calculator
         top = new JPanel();
@@ -96,8 +113,9 @@ public class Calculator extends JFrame implements ActionListener{
         dot.addActionListener(new numberListener());
         buttons.add(dot);
 
-        JButton none = new JButton();
-        buttons.add(none);
+        JButton enter = new JButton("=");
+        enter.addActionListener(new enterListener());
+        buttons.add(enter);
 
         JButton divide = new JButton("/");
         divide.addActionListener(new operandListener());
@@ -111,25 +129,17 @@ public class Calculator extends JFrame implements ActionListener{
         clear.addActionListener(new clearListener());
         buttons.add(clear);
 
-        JButton enter = new JButton("=");
-        enter.addActionListener(new enterListener());
-        buttons.add(enter);
+        JButton newCalc = new JButton("New");
+        newCalc.addActionListener(new newListener());
+        buttons.add(newCalc);
 
-        JButton potato = new JButton("Potato");
-        potato.addActionListener(new potatoListener());
-        buttons.add(potato);
+        JButton dupCalc = new JButton("Dup");
+        dupCalc.addActionListener(new duplicateListener());
+        buttons.add(dupCalc);
 
         add(buttons, BorderLayout.CENTER);
     }
 
-    // Variables for input equation
-    String number1 = " ";
-    String operand = " ";
-    String number2 = " ";
-    double outputNumber = 0.0;
-    boolean number1Used = false;
-    boolean number2Used = false;
-    boolean operandUsed = false;
 
     // Methods for what happens when a number is entered
     public class numberListener implements ActionListener {
@@ -256,19 +266,17 @@ public class Calculator extends JFrame implements ActionListener{
         }
     }
 
-    public class potatoListener implements ActionListener {
+    public class duplicateListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            Calculator potatoCalculator = new Calculator();
+            Calculator potatoCalculator = new Calculator(number1, operand, number2, outputNumber, number1Used, number2Used, operandUsed);
             potatoCalculator.setVisible(true);
         }
     }
 
-    public class selfDestructListener implements ActionListener {
+    public class newListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (int i= 0; i < 1000000; i++) {
-                Calculator selfDesctructCalculator = new Calculator();
-                selfDesctructCalculator.setVisible(true);
-            }
+            Calculator newCalculator = new Calculator(" "," "," ", 0, false, false, false);
+            newCalculator.setVisible(true);
         }
     }
 
@@ -278,7 +286,7 @@ public class Calculator extends JFrame implements ActionListener{
     }
 
     public static void main(String[] args) {
-        Calculator myCalculator = new Calculator();
+        Calculator myCalculator = new Calculator(" "," "," ", 0, false, false, false);
         myCalculator.setVisible(true);
     }
 }
