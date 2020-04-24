@@ -1,8 +1,11 @@
 import java.math.*;
 
 public class test {
-    public static int number(boolean thing) {
-        return (thing == true) ? 1 : 0; // Cool way for true false testing
+    //Create a function that takes a first and last name and reverses them.
+    public static String nameShuffle(String name) {
+        String[] splitName = name.split(" ");
+        String newName = splitName[1] + " " + splitName[0];
+        return newName;
     }
 
     /* Create a function that takes an array as an argument and returns true or false depending on whether
