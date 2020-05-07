@@ -368,8 +368,8 @@ public class Calculator extends JFrame implements ActionListener{
 
     // Something is broken if this is executed
     public void actionPerformed(ActionEvent e) {
-        Calculator dupCalculator = new Calculator(,this.operand,this.number2,this.outputNumber,
-                this.number1Used,this.number2Used,this.operandUsed);
+        Calculator dupCalculator = new Calculator(" "," "," ", 0, false,
+                false, false);
         dupCalculator.setVisible(true);
     }
 
