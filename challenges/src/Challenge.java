@@ -1,6 +1,59 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Challenge {
+
+
+
+    // Create a function that determines whether elements in an array can be re-arranged to form a consecutive list of
+    // numbers where each number appears exactly once.
+    public static boolean cons(int[] arr) {
+        boolean consecutive = true;
+        // Sort Array
+        Arrays.sort(arr);
+        // Iterate through each item
+        for (int i = 1; i < arr.length; i++){
+            if (arr[i] - 1 == arr[i-1]) continue; // check if next item is consecutive
+            else {
+                consecutive = false;
+            }
+        }
+        return  consecutive;
+    }
+
+    public static void main(String[] args) {
+        int[] potato = {5,7,6};
+        System.out.println(cons(potato));
+    }
+
+
+    // Create a function that takes an array of numbers and return "Boom!" if the number 7 appears in the array. Otherwise,
+    // return "there is no 7 in the array".
+    public static String sevenBoom(int[] arr) {
+        String out = "there is no 7 in the array";
+        // Iterate through each array element
+        for (int i : arr) {
+            // Cast the array to a String
+            String number = Integer.toString(i);
+            // Go through each character to check if 7
+            for (int a = 1; a <= number.length(); a++){
+                // Grab character
+                String character = number.substring(a-1,a);
+                // Check if 7
+                if (character.equals("7")){
+                    out = "Boom!";
+                }
+            }
+        }
+        return out;
+    }
+    // Better Solution
+    public static String sevenBoom2(int[] arr) {
+        return Arrays.toString(arr).contains("7") ? "Boom!"
+                : "there is no 7 in the array";
+    }
+
+
     // Create a function that takes a string, checks if it has the same number of x's and o's and returns either true or false.
     public static boolean getXO (String str) {
         int xTotal = 0;
@@ -13,9 +66,6 @@ public class Challenge {
         return xTotal == oTotal;
     }
 
-    public static void main(String[] args) {
-        System.out.println(getXO("XxoO"));
-    }
 
     /* Create a function that tests whether or not an integer is a perfect number. A perfect number is a number that can
      be written as the sum of its factors, excluding the number itself. */
@@ -86,6 +136,29 @@ public class Challenge {
         return out;
     }
 
+
+    // Given an array of integers, write a method that returns an array that has all duplicate elements removed, and is
+    // stored from the least value to the greatest value.
+    public static int[] uniqueSort(int[] nums) {
+        HashSet<Integer> potato = new HashSet<>();
+        for (int i : nums) {
+            potato.add(i);
+        }
+        int[] out = new int[potato.size()];
+        int position = 0;
+        for (int a : potato){
+            out[position] = a;
+            position++;
+        }
+        Arrays.sort(out);
+        return out;
+    }
+    // Better solution
+    public static int[] uniqueSort2(int[] nums) {
+        return java.util.Arrays.stream(nums).distinct().sorted().toArray();
+    }
+
+
     // Create a function that takes two numbers as arguments (num,length) and returns an array of multiples up to length.
     public static int[] arrayOfMultiples(int num, int length) {
         int[] multiples = new int[length];
@@ -114,11 +187,13 @@ public class Challenge {
         return reversed;
     }
 
+
     // Create a method that takes a string and returns the word count. The string will be a sentence.
     public static int countWords(String s) {
         String[] words = s.split(" ");
         return words.length;
     }
+
 
     /*Write a function that takes a string name and a number num (either 0 or 1) and return "Hello" + name if num is 1,
      otherwise return "Bye" + name.*/
