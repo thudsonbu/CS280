@@ -1,8 +1,98 @@
 import java.lang.reflect.Array;
 import java.util.*;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class Challenge {
+    //Create a method that takes an array of 10 integers (between 0 and 9) and returns a string of those numbers
+    // formatted as a phone number (e.g. (555) 555-5555).
+    public static String formatPhoneNumber(int[] nums) {
+        // Return string
+        String out = "(";
+        // Add each number to string
+        for (int i = 0; i < 13; i++) {
+            // Insert first three digits
+            if (i < 3){
+                out += nums[i];
+            }
+            // Insert )
+            else if (i == 3) {
+                out += ")";
+            }
+            // Insert _
+            else if (i == 4) {
+                out += " ";
+            }
+            // Insert second three digits
+            else if (i < 8){
+                out += nums[i-2];
+            }
+            // Insert -
+            else if (i == 8) {
+                out += "-";
+            }
+            // Insert last four digits
+            else {
+                out += nums[i-3];
+            }
+        }
+        return out;
+    }
 
+    //Given two strings, s1 and s2, select only the characters in each string where the character in the same position
+    // in the other string is in uppercase. Return these as a single string.
+    public static String selectLetters(String s1, String s2) {
+        // Return string
+        String out = "";
+        // Find max length
+        int length = (s1.length() > s2.length()) ? s2.length() : s1.length();
+        // Split strings
+        String[] string1 = s1.split("");
+        String[] string2 = s2.split("");
+        // Iterate through s2 checking for case and appending to out string from s1
+        for (int i = 0; i < length; i++) {
+            if (!string2[i].equals(string2[i].toLowerCase())){
+                out = out + string1[i];
+            }
+        }
+        // Iterate through s1 checking for case and appending to out string from s2 if upper case
+        for (int i = 0; i < length; i++) {
+            if (!string1[i].equals(string1[i].toLowerCase())){
+                out = out + string2[i];
+            }
+        }
+        return out;
+    }
+
+    public static void main(String[] args){
+        int[] phoneNumber = {7,2,0,6,2,6,7,6,4,6};
+        System.out.println(formatPhoneNumber(phoneNumber));
+    }
+
+
+    // If you take an integer and form the product of it's individual digits, you get a smaller number. Keep doing this
+    // and eventually you end up with a single digit.
+    public static int persistence(long num) {
+        int out = 0;
+        while (true) {
+            // Convert to String
+            String number = Long.toString(num);
+            // Check length
+            if (number.length() == 1){
+                break;
+            }
+            // Break up string
+            String[] potato = number.split("");
+            // Multiply together
+            long multiplied = 1;
+            for (String a : potato) {
+                multiplied = multiplied * Long.parseLong(a);
+            }
+            num = multiplied;
+            out++;
+        }
+        return out;
+    }
 
 
     // Create a function that determines whether elements in an array can be re-arranged to form a consecutive list of
@@ -19,11 +109,6 @@ public class Challenge {
             }
         }
         return  consecutive;
-    }
-
-    public static void main(String[] args) {
-        int[] potato = {5,7,6};
-        System.out.println(cons(potato));
     }
 
 
